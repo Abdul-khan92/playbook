@@ -1,0 +1,9 @@
+FROM centos:7 
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN yum update -y
+RUN yum install httpd -y
+RUN yum install httpd-tools -y
+RUN yum clean all
+COPY index.html /var/www/html
+EXPOSE 80
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
